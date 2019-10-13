@@ -1,0 +1,69 @@
+body {
+    background-image: url("../images/triviaphoto.jpg");
+    background-attachment: fixed;
+}
+
+
+h1 {
+font-family:'Fascinate Inline', cursive;
+color: yellow;
+font-size: 400%;
+text-align: center;
+}
+
+.container{
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+
+main {
+  background-color: lightgreen;
+  font-family: 'Times New Roman', Times, serif;
+  width: 825px;
+  height: 925px;
+  
+
+}
+
+@media screen and (max-width:980px){
+    .main {
+     background-color: pink;
+     font: 1.75rem;
+     line-height: 1.5;
+     width: 75%;}
+     .container {
+         margin-right: 20px;
+     }
+    }
+    
+    @media screen and (max-width:768px){
+    .main{
+     background-color: plum;
+     font: 1.50rem;
+     line-height: 1.5;
+     width: 100%;}
+     .container {
+         margin-right: 20px;
+     }
+    }
+    
+    @media screen and (max-width:640px) {
+    .main {
+     background-color: salmon;
+     font: 1.25rem;
+     line-height: 1.5;
+     width:100%;
+     margin-top: 40px;}
+    .container {
+      float: none;
+      width: 100%;
+      display: inline-block;
+      margin: 15px auto;  
+    }
+    header {
+        position: static;
+    }
+    }
