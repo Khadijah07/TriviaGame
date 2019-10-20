@@ -17,20 +17,34 @@
 
             <h1>Trivia Game!</h1>
 
+            <text id="timer1">Time Remaining:</text></text><br />
+
+            <div id="start-game">
+                <h2>Press</h2>
+                <button id="start" type="submit">Start</button>
+
+                <h2>Play</h2>
+            </div>
 
 
+            <div id="questions"></div>
 
 
+            <div id="results" class="hidden">
 
-
-        </main>
-
-
-
-
-
+                <div id="resultBox" class="hidden">
+                    <h2>Your Score:</h2>
+                    <p id="correctAnswers"></p>
+                    <p id="wrongAnswers"></p>
+                    <p id="noAnswer"></p>
+                </div>
+            </div>
     </div>
+    </main>
+    <script src="assets/javascript/jquery-js.js"> </script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
 </body>
-<script type="text/javascript" src="assets/javascript/app.js"></script>
+
 
 </html>

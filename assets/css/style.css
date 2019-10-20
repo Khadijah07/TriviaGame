@@ -28,6 +28,25 @@ main {
 
 }
 
+
+#timer1 {
+    font-size: 200%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+#start {
+    background: salmon;
+    margin-top: 10%;
+    padding: 15px;
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 500px;
+    height: 150px;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 @media screen and (max-width:980px){
     .main {
      background-color: pink;

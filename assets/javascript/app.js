@@ -1,152 +1,129 @@
+var timeRemaining = 25;
+var intervalId;
+var correctAnswer;
+var userAnswer;
+var numCorrect = 0;
+var numWrong = 0;
+var numUnanswered = 0;
+
+
+
+// // click events 
+
+
+$("#start-game").click(startTimer);
+
 // click events 
-$(document).on('click', '#start-over', function (b) {
-    game.reset();
-});
-
-$(document).on('click', '.answer-button', function (b) {
-    game.clicked(b);
-});
-
-$(document).on('click', '#start', function (b) {
-    $('#smart').prepend('<text>Time: <text id="timer1">200</text></text><br />');
-    game.loadQuestion();
-});
 
 
+function startTimer() {
+    $("#timer1").text("Time Remaining: " + timeRemaining);
+    setInterval(decrement, 1000);
+    $("#start-game").hide();
+    displayQuestions();
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+}
 
-    function showQuestions(questions, quizContainer) {
-        var output = [];
-        var answers;
-
-        for (var i = 0; i < questions.length; i++) {
-
-            answers = [];
-
-            for (letter in questions[i].answers) {
-
-                answers.push(
-                    '<label>'
-                    + '<input type= "radio" name="question' + i + '" value="' + letter + '">'
-                    + letter + ': '
-                    + questions[i].answers[letter]
-
-                    + '<label>'
-                );
-            }
-        }
-        output.push(
-            '<div class="question">' + questions[i].question + '</div>'
-            + '<div class="answers">' + answers.join('') + '</div>'
-
-        );
+function decrement() {
+    timeRemaining--;
+    $("#timer1").text("Time Remaining" + timeRemaining);
+    if (timeRemaining === 0) {
+        stopTimer();
     }
+}
 
-    quizContainer.innerHTML = output.join('');
+function stopTimer() {
+    clearInterval(intervalId);
+    keepScore();
 }
 
 
-function showResults(questions, quizContainer, resultsContainer) {
-
-    var answerContainers = quizContainer.querySelectorAll('.answers');
-
-    var userAnswer = '';
-    var numCorrect = 0;
-
-    for (var i = 0; i < questions.length; i++) {
-
-        if (userAnswer === questions[i].correctAnswer) {
+function keepScore() {
+    for (var i = 0; i < quizQuestions.length; i++) {
+        correctAnswer = quizQuestions[i].correct;
+        console.log(correctAnswer);
+        console.log(userAnswer);
+        if (userAnswer === correctAnswer) {
             numCorrect++;
-
-            answerContainers[i].style.color = 'blue';
-
+        } else if (userAnswer === "") {
+            numUnanswered++;
+        } else if (userAnswer !== correctAnswer) {
+            numWrong++;
         }
-        else {
 
-            answerContainers[i].style.color = 'green';
-        }
 
     }
-
-    resultsContainer.innerHTML = numCorrect + 'out of' + questions.length;
+    showResults(numCorrect, numWrong, numUnanswered);
 }
 
-showQuestions(questions, quizContainer);
 
+function showResults(numWrong, numCorrect, numUnanswered) {
 
-submitButton.onclick = function () {
-    showResults(questions, quizContainer, resultsContainer);
+    $("#resultBox").show();
+    $("#questions").empty();
+    $("#timer1").empty();
+    $("#timer1").hide();
+    $("#correctAnswers").text("Correct Answers: " + numCorrect);
+    $("#wrongAnswers").text("Wrong Answers: " + numWrong);
+    $("#noAnswer").text("Questions you Skipped: " + numUnanswered);
 }
+
+function displayQuestion() {
+    var questionContainer = $("#questions");
+    var answerChoices = $(".form-check");
+
+    for (var i = 0; i < quizQuestions.length; i++) {
+
+        var choice1 = quizQuestions[i].answers[0];
+        var choice1 = quizQuestions[i].answers[1];
+        var choice1 = quizQuestions[i].answers[2];
+
+        questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice1 + '</label></div>');
+        questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice2 + '</label></div>');
+        questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice3 + '</label></div>');
+    }
+
+    var endOfQuizButton = '<button type="button" id="quizEnd" type="submit">FINISH!</button>'
+    questionContainer.append(quizEndButton);
+    $("#quizEnd").on("click", stopTimer);
+}
+
 
 
 // questions 
 
-var myQuestions = [
+var quizQuestions = [
     {
         question: "When was Apple founded ? ",
-        answers: {
-            a: "April 1, 1976",
-            b: "June 7, 1980",
-            c: "August 5, 1995",
-            d: "January 1, 1985"
-        },
-        correctAnswer: 'a'
-    }, {
+        answers: ["April 1, 1976", "June 7, 1980", "August 5, 1995", "January 1, 1985"],
+        correctAnswer: "April 1, 1976"
+    },
+    {
         question: "What does IBM stand for?",
-        answers: {
-            a: "International Blue Mechanics",
-            b: "Indigo Blue Mate",
-            c: "International Business Machines",
-            d: "Intact Buying Modules"
-        },
-        correctAnswer: 'c'
-    }, {
+        answers: ["International Blue Mechanics", "Indigo Blue Mate", "International Business Machines", , "Intact Buying Modules"],
+        correctAnswer: "International Business Machines"
+    },
+
+    {
         question: "Who created the first computer program??",
-        answers: {
-            a: "Ada Lovelace",
-            b: "Charles Babbage",
-            c: "Lord Byron",
-            d: "Grace Hopper"
-        },
-        correctAnswer: 'a'
+        answers: ["Ada Lovelace", "Charles Babbage", "Lord Byron", "Grace Hopper"],
+        correctAnswer: "Ada Lovelace"
     }, {
         question: "What does HTML stand for?",
-        answers: {
-            a: "Hello There Mary Lou",
-            b: "Hypertext Markup Language",
-            c: "Hidden Text Machine Language",
-            d: "Hurdle Tender Meetup Loft"
-        },
-        correctAnswer: 'b'
-    }, {
+        answers: ["Hello There Mary Lou", "Hypertext Markup Language", "Hidden Text Machine Language", "Hurdle Tender Meetup Loft"],
+        correctAnswer: "Hypertext Markup Language"
+    },
+
+    {
         question: "What is the use of JavaScript?",
-        answers: {
-            a: "Client scripting language",
-            b: "Meal delivery service",
-            c: "Editing photos",
-            d: "Software encryption"
-        },
-        correctAnswer: 'a'
+        answers: ["Client scripting language", "Meal delivery service", "Editing photos", "Software encryption"],
+        correctAnswer: "Client scripting language"
     }, {
         question: "Who fouded Microsoft?",
-        answers: {
-            a: "Bill Gates and Paul Allen",
-            b: "Steve Jobs",
-            c: "Daniel Cesar",
-            d: "Hieronymous Bosch"
-        },
-        correctAnswer: 'a'
-    }];
-
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-
-generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
-
-
-
+        answers: ["Bill Gates and Paul Allen", "Steve Jobs", "Daniel Cesar", "Hieronymous Bosch"],
+        correctAnswer: "Bill Gates and Paul Allen"
+    }
+]
 
 
 
@@ -165,3 +142,8 @@ generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
 // }
 
 //update = setInterval("timer01()", 1000); 
+
+
+
+
+
