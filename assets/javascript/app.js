@@ -20,8 +20,7 @@ function startTimer() {
     $("#timer1").text("Time Remaining: " + timeRemaining);
     setInterval(decrement, 1000);
     $("#start-game").hide();
-    displayQuestions();
-
+    displayQuestion();
 }
 
 function decrement() {
@@ -69,22 +68,28 @@ function showResults(numWrong, numCorrect, numUnanswered) {
 }
 
 function displayQuestion() {
-    var questionContainer = $("#questions");
+    var questionContainer = $("#quizQuestions");
     var answerChoices = $(".form-check");
 
     for (var i = 0; i < quizQuestions.length; i++) {
 
         var choice1 = quizQuestions[i].answers[0];
-        var choice1 = quizQuestions[i].answers[1];
-        var choice1 = quizQuestions[i].answers[2];
+        var choice2 = quizQuestions[i].answers[1];
+        var choice3 = quizQuestions[i].answers[2];
+        var choice4 = quizQuestions[i].answers[3];
+        var choice5 = quizQuestions[i].answers[4];
+
 
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice1 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice2 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice3 + '</label></div>');
+        questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice4 + '</label></div>');
+        questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice5 + '</label></div>');
+
+
     }
 
     var endOfQuizButton = '<button type="button" id="quizEnd" type="submit">FINISH!</button>'
-    questionContainer.append(quizEndButton);
     $("#quizEnd").on("click", stopTimer);
 }
 
@@ -131,7 +136,7 @@ var quizQuestions = [
 
 // var c = 200;
 
-// function timer01() {
+// function timer1() {
 //     c = c - 1;
 //     if (c < 200) {
 //         timer1.innerHTML = c;
@@ -141,9 +146,5 @@ var quizQuestions = [
 //     }
 // }
 
-//update = setInterval("timer01()", 1000); 
-
-
-
-
+//update = setInterval("timer1()", 1000); 
 
