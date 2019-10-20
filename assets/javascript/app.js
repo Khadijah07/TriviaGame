@@ -1,5 +1,6 @@
 var timeRemaining = 25;
 var intervalId;
+var quizQuestions;
 var correctAnswer;
 var userAnswer;
 var numCorrect = 0;
@@ -59,7 +60,7 @@ function keepScore() {
 function showResults(numWrong, numCorrect, numUnanswered) {
 
     $("#resultBox").show();
-    $("#questions").empty();
+    $("#quizQuestions").empty();
     $("#timer1").empty();
     $("#timer1").hide();
     $("#correctAnswers").text("Correct Answers: " + numCorrect);
@@ -67,7 +68,7 @@ function showResults(numWrong, numCorrect, numUnanswered) {
     $("#noAnswer").text("Questions you Skipped: " + numUnanswered);
 }
 
-function displayQuestion() {
+function displayQuestion(question) {
     var questionContainer = $("#quizQuestions");
     var answerChoices = $(".form-check");
 
@@ -79,13 +80,11 @@ function displayQuestion() {
         var choice4 = quizQuestions[i].answers[3];
         var choice5 = quizQuestions[i].answers[4];
 
-
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice1 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice2 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice3 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice4 + '</label></div>');
         questionContainer.append('<div class="form-check"><input class="form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + choice5 + '</label></div>');
-
 
     }
 

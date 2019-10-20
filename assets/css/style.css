@@ -47,6 +47,22 @@ main {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+#quizEnd {
+    background: rgb(217, 219, 73);
+    margin-top: 10%;
+    padding: 15px;
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 60px;
+    height: 15px;
+    font-size: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+
+
+
+}
 @media screen and (max-width:980px){
     .main {
      background-color: pink;
